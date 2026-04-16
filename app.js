@@ -1,16 +1,17 @@
 const express = require('express');
+const morgan = require('morgan');
+const healthRoutes = require('./routes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+app.use(morgan('dev'));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
 
-app.get('/health', (_req, res) => {
-  res.status(200).json({ status: 'success' });
-});
+app.use('/', healthRoutes);
 
 app.get('/api/classify', async (req, res) => {
   const { name } = req.query;
@@ -67,6 +68,7 @@ app.use((_req, res) => {
   res.status(404).json({ status: 'error', message: 'Route not found' });
 });
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
