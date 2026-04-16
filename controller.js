@@ -23,7 +23,11 @@ const classifyName = async (req, res) => {
     const upstreamResponse = await fetch(`https://api.genderize.io?name=${encodeURIComponent(normalizedName)}`);
 
     if (!upstreamResponse.ok) {
-      return res.status(502).json({ status: 'error', message: 'Failed to fetch prediction from upstream API' });
+      const upstreamStatus = upstreamResponse.status;
+      const message = upstreamStatus === 429
+        ? 'Upstream API rate limit exceeded. Try again later.'
+        : `Failed to fetch prediction from upstream API (status ${upstreamStatus})`;
+      return res.status(502).json({ status: 'error', message });
     }
 
     const payload = await upstreamResponse.json();
