@@ -2,8 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const { healthCheck } = require('./controller');
+const { healthCheck, classifyName  } = require('./controller');
 
 router.get('/health', healthCheck);
+router.get('/classify', classifyName);
 
 module.exports = router;
