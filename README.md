@@ -1,4 +1,4 @@
-# GenderSize - Stage 0 API
+# Classify NAME API
 
 Single endpoint service that integrates with Genderize API and returns a processed response.
 
