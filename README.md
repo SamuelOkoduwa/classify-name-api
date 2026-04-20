@@ -50,7 +50,7 @@ Default port is `3000`.
 ## Quick Test
 
 ```bash
-curl "http://localhost:3000/api/classify?name=john"
+curl "https://classify-name-api-production.up.railway.app/"
 ```
 
 ## Notes
